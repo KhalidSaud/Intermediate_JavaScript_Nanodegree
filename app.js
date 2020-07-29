@@ -9,13 +9,6 @@
 
     // Use IIFE to get human data from form
 
-    // console.log('Test');
-    // var submitButton = document.getElementById('btn').addEventListener('click', function(){
-    //     var form = document.getElementById('dino-compare').forms[0];
-    //     document.forms.elements
-    //     console.log(form.elements);
-    // });
-
     const myForm = document.getElementById("dino-compare");
     var name = "";
     var heightInFeet = 0;
@@ -38,6 +31,15 @@
         console.log(weight);
         console.log(diet);
 
+        myForm.style.display = "none";
+        document.getElementById("grid").style.display = "flex";
+
+    });
+
+    // Back btn to form
+    document.getElementById("backBtn").addEventListener('click', () => {
+        document.getElementById("grid").style.display = "none";
+        myForm.style.display = "block";
     });
     
     // Create Dino Compare Method 1
