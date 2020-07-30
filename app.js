@@ -31,14 +31,19 @@
         console.log(weight);
         console.log(diet);
 
+        var humanName = document.getElementById("humanName");
+        humanName.textContent = name;
+
         myForm.style.display = "none";
         document.getElementById("grid").style.display = "flex";
+        document.getElementById("backBtn").style.display = "block";
 
     });
 
     // Back btn to form
     document.getElementById("backBtn").addEventListener('click', () => {
         document.getElementById("grid").style.display = "none";
+        document.getElementById("backBtn").style.display = "none";
         myForm.style.display = "block";
     });
     
@@ -51,7 +56,7 @@
 
     
     // Create Dino Compare Method 3
-    // NOTE: Weight in JSON file is in lbs, height in inches.
+    // NOTE: Weight in JSON  file is in lbs, height in inches.
 
 
     // Generate Tiles for each Dino in Array
