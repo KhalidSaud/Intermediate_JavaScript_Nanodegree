@@ -4,7 +4,7 @@ $(document).ready(function () {
 
         var dinos = data.Dinos.map( function(dino) {
         
-            var newDino = new Dino(dino.species, dino.weight, dino.height, dino.diet, dino.where, dino.when, dino.fact);
+            var newDino = new Dino2(dino.species, dino.weight, dino.height, dino.diet, dino.where, dino.when, dino.fact);
             return newDino;
         });
 
@@ -12,19 +12,25 @@ $(document).ready(function () {
     });
 });
 
-// Create Dino Constructor
-function Dino(species, weight, height, diet, where, when, fact){
+// BluePrint  Constructur
+function BluePrint(species, weight, height, diet){
     this.species = species;
     this.weight = weight;
     this.height = height;
     this.diet = diet;
+
+    this.image = function () {
+        return `images/${species.toLowerCase()}.png`;
+    };
+}
+
+
+function Dino2(species, weight, height, diet, where, when, fact){
+    BluePrint.call(this, species, weight, height, diet);
+
     this.where = where;
     this.when = when;
     this.fact = fact;
-
-    this.image = function () {
-        return `images/${species}.png`;
-    };
 
     // Create Dino Compare Method 1
     // NOTE: Weight in JSON file is in lbs, height in inches.
@@ -72,8 +78,6 @@ function Dino(species, weight, height, diet, where, when, fact){
 }
 
 
-
-// Create Dino Objects
 const MainDinos = {
     dinos: [],
     setDinos: function(newDinos){
@@ -85,15 +89,19 @@ const MainDinos = {
 
 }
 
-
 // Create Human Object
-var human = new Dino("Human");
+function Human(species, name, weight, height, diet){
+    BluePrint.call(this, species, weight, height, diet);
 
+    this.name = name;
+}
+
+var human = new Human('Human');
 
 
 // Use IIFE to get human data from form
 function getUserData(e){
-    human.species = e.target.elements.name?.value || "";
+    human.name = e.target.elements.name?.value || "";
     human.feet = e.target.elements.feet?.value || 0;
     human.inches = e.target.elements.inches?.value || 0;
     human.weight = e.target.elements.weight?.value || 0;
@@ -108,14 +116,13 @@ function addTiles(){
 
     var dinoArray = MainDinos.getDinos();
     dinoArray = shuffle(dinoArray);
-
     var elements = document.getElementsByClassName("grid-item");
 
     var index = 0;
     for(i = 0; i < elements.length; i++){
         if(i == 4){
             elements[i].innerHTML = `<img src="${human.image()}">
-            <p><span id="${human.species}">${human.species} - ${human.feet} feet - ${human.weight} lbs - ${human.diet}</span></p>`;
+            <p><span id="${human.name}">${human.name} - ${human.feet} feet - ${human.weight} lbs - ${human.diet}</span></p>`;
         } else {
             elements[i].innerHTML = `<img src="${dinoArray[index].image()}">
             <p><span id="${dinoArray[index].species}">${dinoArray[index].randomizeFact(human)}</span></p>
