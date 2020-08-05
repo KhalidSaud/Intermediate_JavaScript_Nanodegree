@@ -4,7 +4,7 @@ $(document).ready(function () {
 
         var dinos = data.Dinos.map( function(dino) {
         
-            var newDino = new Dino2(dino.species, dino.weight, dino.height, dino.diet, dino.where, dino.when, dino.fact);
+            var newDino = new Dino(dino.species, dino.weight, dino.height, dino.diet, dino.where, dino.when, dino.fact);
             return newDino;
         });
 
@@ -25,7 +25,7 @@ function BluePrint(species, weight, height, diet){
 }
 
 
-function Dino2(species, weight, height, diet, where, when, fact){
+function Dino(species, weight, height, diet, where, when, fact){
     BluePrint.call(this, species, weight, height, diet);
 
     this.where = where;
